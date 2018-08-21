@@ -1,0 +1,39 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "A Koa JS Forge server backend using Passport JS",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js --ignore src/configuration/config.json",
+    "init": "node src/configuration/config.js",
+    "standard": "standard ./src/**/*.js",
+    "start": "NODE_ENV=production node src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Autodesk",
+    "Forge",
+    "Boilerplate",
+    "Koa",
+    "Javascript",
+    "Passport"
+  ],
+  "author": "Bastien Mazeran",
+  "license": "MIT",
+  "dependencies": {
+    "@koa/cors": "^2.2.2",
+    "koa": "^2.5.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-favicon": "^2.0.1",
+    "koa-helmet": "^4.0.0",
+    "koa-morgan": "^1.0.1",
+    "koa-passport": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.8.2",
+    "nodemon": "^1.18.3",
+    "passport-oauth2": "^1.4.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "standard": "^11.0.1"
+  }
+}
