@@ -59,3 +59,7 @@ typings/
 
 # next.js build output
 .next
+server/src/configuration/config.json
+server/package-lock.json
+.vscode/settings.json
+client/package-lock.json
