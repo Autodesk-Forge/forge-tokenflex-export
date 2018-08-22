@@ -5,7 +5,7 @@
     </v-navigation-drawer>
     <v-toolbar color="indigo" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>My Forge Application</v-toolbar-title>
+      <v-toolbar-title>Consumption Reporting</v-toolbar-title>
     </v-toolbar>
     <Content />
     <Footer />
@@ -35,7 +35,7 @@ export default {
   }),
   methods: {
     async setUserData () {
-      this.$axios({
+      await this.$axios({
         method: 'GET',
         url: `${config.koahost}/api/user/profile`
       })
@@ -50,7 +50,7 @@ export default {
           }
         })
         .catch(err => {
-          console.info(`\nsetUserData error: ${JSON.stringify(err)}\n`)
+          console.error(`\n/api/user/profile error: ${JSON.stringify(err)}\n`)
         })
     }
   },
