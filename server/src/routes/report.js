@@ -15,7 +15,7 @@ router.get(
         headers: { Authorization: `Bearer ${ctx.session.publicCredentials.access_token}` },
         json: true,
         method: 'GET',
-        uri: 'https://developer.api.autodesk.com/userprofile/v1/users/@me'
+        uri: 'https://developer-stg.api.autodesk.com/userprofile/v1/users/@me'
       }
       const response = await rp(options)
       ctx.body = JSON.stringify(response)
