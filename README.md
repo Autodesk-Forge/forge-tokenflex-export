@@ -1,4 +1,4 @@
-# forge-koa-vue-passport-boilerplate
+# consumption-reporting-vue-koa-app
 A Forge application to report on consumption data.
 
 ## License
