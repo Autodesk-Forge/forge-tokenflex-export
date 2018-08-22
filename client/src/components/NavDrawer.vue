@@ -63,7 +63,7 @@ export default {
         this.$store.state.isUserLoggedIn = false
         this.$store.dispatch('setUser', null)
         window.open(
-          'https://accounts.autodesk.com/Authentication/LogOut',
+          'https://accounts-staging.autodesk.com/Authentication/LogOut',
           '_blank'
         )
         this.$router.push('/')
