@@ -35,6 +35,6 @@ app.use(requireLogin)
 app.use(reportRoutes.routes())
 app.use(reportRoutes.allowedMethods())
 
-app.listen(8081, () => {
-  console.info('Server listening on port: 8081.\n')
+app.listen(process.env.PORT || 5000, () => {
+  console.info('Server listening on port: 5000.\n')
 })

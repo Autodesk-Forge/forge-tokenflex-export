@@ -1,7 +1,14 @@
 'use strict'
 
 function Token (session) {
-  this._oAuthTemplate = {
+  this._session = session
+}
+
+/**
+ * The Forge oAuth2 client JSON template
+ */
+Token.prototype.getOAuthTemplate = function () {
+  return {
     'authentication': {
       'authorizationUrl': '/authentication/v1/authorize',
       'tokenUrl': '/authentication/v1/gettoken',
@@ -33,60 +40,52 @@ function Token (session) {
     'scope': 'data:read data:write data:create data:search bucket:create bucket:read bucket:update bucket:delete',
     'redirectUri': ''
   }
-  this._session = session
 }
 
-Token.prototype.getInternalOAuth = function () {
+Token.prototype.getForgeSession = function () {
   // reconstruct JSON structure per template
-  const internalOAuth = this._oAuthTemplate
-  internalOAuth.clientId = this._session.internalOAuth.clientId
-  internalOAuth.clientSecret = this._session.internalOAuth.clientSecret
-  internalOAuth.credentials.expires_at = this._session.internalOAuth.expiresAt
-  internalOAuth.autoRefresh = this._session.internalOAuth.autoRefresh
-  internalOAuth.scope = this._session.internalOAuth.scope
-  internalOAuth.redirectUri = this._session.internalOAuth.redirectUri
-  return internalOAuth
+  let forgeSession = {
+    session: {
+      passport: {
+        user: this._session.passport.user
+      },
+      oauth2: {
+        forge: this.getOAuthTemplate()
+      }
+    }
+  }
+  forgeSession.session.oauth2.forge.clientId = this._session.forge.oauth2.client_id
+  forgeSession.session.oauth2.forge.clientSecret = this._session.forge.oauth2.client_secret
+  forgeSession.session.oauth2.forge.credentials.expires_at = this._session.forge.oauth2.expires_at
+  forgeSession.session.oauth2.forge.autoRefresh = this._session.forge.oauth2.auto_refresh
+  forgeSession.session.oauth2.forge.scope = this._session.forge.oauth2.scope
+  forgeSession.session.oauth2.forge.redirectUri = this._session.forge.oauth2.redirect_uri
+  return forgeSession
 }
 
-Token.prototype.setInternalOAuth = function (internalOAuth) {
-  this._session.internalOAuth = internalOAuth
-}
-
-Token.prototype.getPublicOAuth = function () {
-  // reconstruct JSON structure per template
-  const publicOAuth = this._oAuthTemplate
-  publicOAuth.clientId = this._session.publicOAuth.clientId
-  publicOAuth.clientSecret = this._session.publicOAuth.clientSecret
-  publicOAuth.credentials.expires_at = this._session.publicOAuth.expiresAt
-  publicOAuth.autoRefresh = this._session.publicOAuth.autoRefresh
-  publicOAuth.scope = this._session.publicOAuth.scope
-  publicOAuth.redirectUri = this._session.publicOAuth.redirectUri
-  return publicOAuth
-}
-
-Token.prototype.setPublicOAuth = function (publicOAuth) {
-  this._session.publicOAuth = publicOAuth
-}
-
-Token.prototype.getInternalCredentials = function () {
-  return this._session.internalCredentials
-}
-
-Token.prototype.setInternalCredentials = function (internalCredentials) {
-  this._session.internalCredentials = internalCredentials
-}
-
-Token.prototype.getPublicCredentials = function () {
-  return this._session.publicCredentials
-}
-
-Token.prototype.setPublicCredentials = function (publicCredentials) {
-  this._session.publicCredentials = publicCredentials
+/**
+ * The Forge session has following JSON structure
+ *
+ * {
+ *   session: {
+ *     oauth2: {
+ *       auto_refresh: <Boolean>,
+ *       client_id: <String>,
+ *       client_secret: <String>,
+ *       expires_at: <String>,
+ *       redirect_uri: <String>,
+ *       scope: <Array>
+ *     }
+ *   }
+ * }
+ */
+Token.prototype.setForgeSession = function (forgeSession) {
+  this._session.forge = forgeSession
 }
 
 Token.prototype.isAuthorized = function () {
   // !! converts value into boolean
-  return (!!this._session.publicCredentials)
+  return (!!this._session.passport.user)
 }
 
 module.exports = Token

@@ -1,22 +1,24 @@
 {
-    "favicon": "/public/favicon.ico",
-    "oauth2": {
-      "authorizationURL": "<your authorization URL>",
-      "clientID": "<your Forge app ID>",
-      "clientSecret": "<your Forge app secret>",
-      "callbackURL": "/callback",
-      "tokenURL": "<your token URL>"
-    },
-    "scope": "<your scope>",
-    "session": {
-      "key": "koa:sess",
-      "maxAge": 3600000,
-      "overwrite": true,
-      "httpOnly": true,
-      "signed": true,
-      "rolling": false,
-      "renew": false
-    },
-    "tlsversion": "TLSv1_2_method",
-    "vuehost": "http://localhost:8080"
+  "favicon": "/public/favicon.ico",
+  "oauth2": {
+    "authorizationURL": "<your authorization URL>",
+    "clientID": "<your Forge app ID>",
+    "clientSecret": "<your Forge app secret>",
+    "callbackURL": "/callback",
+    "tokenURL": "<your token URL>"
+  },
+  "http_port": 5000,
+  "https_port": 5001,
+  "scope": "<your scope>",
+  "session": {
+    "key": "koa:sess",
+    "maxAge": 3600000,
+    "overwrite": true,
+    "httpOnly": true,
+    "signed": true,
+    "rolling": false,
+    "renew": false
+  },
+  "tlsversion": "TLSv1_2_method",
+  "vuehost": "http://localhost:8080"
 }

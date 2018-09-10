@@ -10,15 +10,17 @@ config.oauth2.clientSecret = process.env.FORGE_CLIENT_SECRET
 config.oauth2.tokenURL = 'https://developer-stg.api.autodesk.com/authentication/v1/gettoken'
 config.scope = ['data:read']
 
+config.vuehost = process.env.HEROKU_VUE_HOST
+
 fs.writeFile(
-  './src/configuration/config.json', 
-  JSON.stringify(config, null, 2), 
+  './src/configuration/config.json',
+  JSON.stringify(config, null, 2),
   err => {
     if (err) {
       console.error(err)
       return
     }
     console.info('New configuration file has been created.\n')
-})
+  })
 
 module.exports = config
