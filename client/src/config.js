@@ -1,7 +1,7 @@
 'use strict'
 
 const config = {
-  koahost: 'http://localhost:8081'
+  koahost: process.env.VUE_APP_HEROKU_KOA_HOST
 }
 
 module.exports = config

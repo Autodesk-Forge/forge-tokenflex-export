@@ -12,7 +12,7 @@ router.get(
     if (ctx.isAuthenticated) {
       const options = {
         agentOptions: { secureProtocol: config.tlsversion },
-        headers: { Authorization: `Bearer ${ctx.session.publicCredentials.access_token}` },
+        headers: { Authorization: `Bearer ${ctx.session.passport.user.access_token}` },
         json: true,
         method: 'GET',
         url: `https://developer-stg.api.autodesk.com/eccr-data-api/v1/contract/${this.params.contract_number}`
@@ -31,7 +31,7 @@ router.get(
     if (ctx.isAuthenticated) {
       const options = {
         agentOptions: { secureProtocol: config.tlsversion },
-        headers: { Authorization: `Bearer ${ctx.session.publicCredentials.access_token}` },
+        headers: { Authorization: `Bearer ${ctx.session.passport.user.access_token}` },
         json: true,
         method: 'GET',
         url: 'https://developer-stg.api.autodesk.com/eccr-data-api/v1/contract'
@@ -50,7 +50,7 @@ router.get(
     if (ctx.isAuthenticated) {
       const options = {
         agentOptions: { secureProtocol: config.tlsversion },
-        headers: { Authorization: `Bearer ${ctx.session.publicCredentials.access_token}` },
+        headers: { Authorization: `Bearer ${ctx.session.passport.user.access_token}` },
         json: true,
         method: 'GET',
         uri: 'https://developer-stg.api.autodesk.com/userprofile/v1/users/@me'
