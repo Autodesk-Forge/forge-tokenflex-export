@@ -8,6 +8,14 @@
         <v-list-tile-title>Home</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
+    <v-list-tile @click="displayContracts" v-if="this.$store.state.isUserLoggedIn">
+      <v-list-tile-action>
+        <v-icon>assessment</v-icon>
+      </v-list-tile-action>
+      <v-list-tile-content>
+        <v-list-tile-title>Contracts</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
     <v-list-tile v-if="this.$store.state.isUserLoggedIn">
       <v-list-tile-action>
         <v-flex xs4 sm2 md1>
@@ -49,6 +57,10 @@ import config from './../config'
 
 export default {
   methods: {
+    displayContracts () {
+      this.$router.push('/contracts?isUserLoggedIn=true')
+      this.$router.go()
+    },
     goHome () {
       this.$router.push('/')
     },
