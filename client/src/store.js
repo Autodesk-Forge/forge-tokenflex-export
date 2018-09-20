@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    contractNumber: null,
     isUserLoggedIn: false,
     user: {
       fullName: null,
@@ -12,6 +13,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setContractNumber (state, contractNumber) {
+      state.contractNumber = contractNumber
+    },
     setUser (state, user) {
       state.user = user
     },
@@ -23,6 +27,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setContractNumber ({ commit }, contractNumber) {
+      commit('setContractNumber', contractNumber)
+    },
     setUser ({ commit }, user) {
       commit('setUser', user)
     },
