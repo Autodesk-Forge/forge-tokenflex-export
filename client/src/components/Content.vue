@@ -39,7 +39,7 @@
     <v-container fluid v-if="this.$store.state.contractNumber">
       <v-layout row justify-center align-center>
         <v-flex xs12>
-          <v-card flat> 
+          <v-card flat>
             <br>
             <gmap-map :center="center" :zoom="zoom" style="width:100%; height: 400px;">
               <gmap-marker
