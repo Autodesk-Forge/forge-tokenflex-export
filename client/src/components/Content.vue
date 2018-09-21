@@ -45,7 +45,7 @@
               <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false">
                 {{ infoContent }}
               </gmap-info-window>
-              <gmap-marker :key="index" v-for="(m, index) in markers" :position="m.position" :clickable="true" @click="toggleInfoWindow(m,i)"></gmap-marker>
+              <gmap-marker :key="index" v-for="(m, index) in markers" :position="m.position" :clickable="true" @click="toggleInfoWindow(m,index)"></gmap-marker>
             </gmap-map>
           </v-card>
         </v-flex>
@@ -107,6 +107,7 @@ export default {
     displayMap (contractNumber) {
       this.$store.dispatch('setContractNumber', contractNumber)
       this.addInfoMarker(48.866667, 2.333333, 'Vive Paris!')
+      this.addInfoMarker(52.5166667, 13.4, 'Wilkommen Berlin!')
       this.$router.push(`/auth?isUserLoggedIn=true&contractNumber=${contractNumber}`)
     },
     async getContracts () {
