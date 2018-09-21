@@ -41,14 +41,11 @@
         <v-flex xs12>
           <v-card flat>
             <br>
-            <gmap-map :center="center" :zoom="zoom" style="width:100%; height: 400px;">
-              <gmap-marker
-                :key="index"
-                v-for="(m, index) in markers"
-                :position="m.position"
-                @click="center=m.position"
-              >
-              </gmap-marker>
+            <gmap-map :center="center" :zoom="zoom" style="width:100%; height:800px;">
+              <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false">
+                {{ infoContent }}
+              </gmap-info-window>
+              <gmap-marker :key="index" v-for="(m, index) in markers" :position="m.position" :clickable="true" @click="toggleInfoWindow(m,i)"></gmap-marker>
             </gmap-map>
           </v-card>
         </v-flex>
@@ -65,7 +62,17 @@ export default {
   data () {
     return {
       center: { lat: 45.508, lng: -73.587 }, // Montreal
+      currentMidx: null,
       currentPlace: null,
+      infoContent: '',
+      infoOptions: { // Offset infowindow so it visually sits nicely on top of our marker
+        pixelOffset: {
+          width: 0,
+          height: -35
+        }
+      },
+      infoWindowPos: null,
+      infoWinOpen: false,
       items: [],
       markers: [],
       pagination: { rowsPerPage: 4 },
@@ -87,8 +94,19 @@ export default {
         this.currentPlace = null
       }
     },
+    addInfoMarker (lat, lng, text) {
+      const marker = {
+        position: {
+          lat: lat,
+          lng: lng
+        },
+        infoText: text
+      }
+      this.markers.push(marker)
+    },
     displayMap (contractNumber) {
       this.$store.dispatch('setContractNumber', contractNumber)
+      this.addInfoMarker(48.866667, 2.333333, 'Vive Paris!')
       this.$router.push(`/auth?isUserLoggedIn=true&contractNumber=${contractNumber}`)
     },
     async getContracts () {
@@ -131,6 +149,17 @@ export default {
     },
     setPlace (place) {
       this.currentPlace = place
+    },
+    toggleInfoWindow: function (marker, idx) {
+      this.infoWindowPos = marker.position
+      this.infoContent = marker.infoText
+      // Check if it is the same marker that was selected, if yes toggle
+      if (this.currentMidx === idx) {
+        this.infoWinOpen = !this.infoWinOpen
+      } else { // If different marker set infowindow to open and reset current marker index
+        this.infoWinOpen = true
+        this.currentMidx = idx
+      }
     }
   },
   mounted () {
