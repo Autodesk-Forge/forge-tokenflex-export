@@ -1,12 +1,8 @@
 <template>
   <v-app id="forge">
-    <v-navigation-drawer v-model="drawer" fixed app>
-      <NavDrawer />
-    </v-navigation-drawer>
-    <v-toolbar color="indigo" dark fixed app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Consumption Reporting</v-toolbar-title>
-    </v-toolbar>
+
+      <Header />
+
     <Content />
     <Footer />
   </v-app>
@@ -17,7 +13,14 @@ import config from './config'
 
 import Content from '@/components/Content.vue'
 import Footer from '@/components/Footer.vue'
-import NavDrawer from '@/components/NavDrawer.vue'
+import Header from '@/components/Header.vue'
+
+Date.prototype.today = function () {
+  return ((this.getDate() < 10) ? '0' : '') + this.getDate() + '/' + (((this.getMonth() + 1) < 10) ? '0' : '') + (this.getMonth() + 1) + '/' + this.getFullYear()
+}
+Date.prototype.timeNow = function () {
+  return ((this.getHours() < 10) ? '0' : '') + this.getHours() + ':' + ((this.getMinutes() < 10) ? '0' : '') + this.getMinutes() + ':' + ((this.getSeconds() < 10) ? '0' : '') + this.getSeconds()
+}
 
 export default {
   beforeMount () {
@@ -28,14 +31,14 @@ export default {
     }
   },
   components: {
-    Content, Footer, NavDrawer
+    Content, Footer, Header, Chart
   },
   data: () => ({
     drawer: null
   }),
   methods: {
     async setUserData () {
-      this.$store.dispatch('setLoading',true)
+      this.$store.dispatch('setLoading', true)
       await this.$axios({
         method: 'GET',
         url: new URL('/api/user/profile', config.koahost).href
@@ -52,7 +55,7 @@ export default {
         })
         .catch(err => {
           console.error(`\n/api/user/profile error: ${JSON.stringify(err)}\n`)
-        }).finally(()=>this.$store.dispatch('setLoading',false))
+        }).finally(() => this.$store.dispatch('setLoading', false))
     }
   },
   name: 'App'

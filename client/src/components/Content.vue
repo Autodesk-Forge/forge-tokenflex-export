@@ -1,11 +1,23 @@
 <template>
   <v-content>
+
     <v-container fluid grid-list-md v-if="!this.$store.state.contractNumber">
-      <v-toolbar slot="header" class="mb-2" color="indigo darken-5" dark flat >
-        <v-toolbar-title>Contracts</v-toolbar-title>
-      </v-toolbar>
+      <v-card>
+
+          <v-toolbar color="white" flat>
+
+            <v-toolbar-title class="grey--text text--darken-4">Contracts</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn icon light>
+           <v-switch v-model="showContract"></v-switch>
+         </v-btn>
+          </v-toolbar>
+
       <v-progress-linear :indeterminate="true" v-if="this.$store.state.loading"></v-progress-linear>
-      <v-data-iterator :items="items" :rows-per-page-items="rowsPerPageItems" :pagination.sync="pagination" content-tag="v-layout" hide-actions row wrap v-if='!this.$store.state.loading'>      
+
+  <v-container fluid grid-list-md v-if="!this.$store.state.loading&&showContract" transition="slide-y-transition" >
+      <v-data-iterator  :items="items" :rows-per-page-items="rowsPerPageItems" :pagination.sync="pagination" content-tag="v-layout" hide-actions row wrap >
+
         <v-flex slot="item" slot-scope="props" xs12 sm6 md4 lg3 >
           <v-card>
             <v-card-actions>
@@ -32,11 +44,12 @@
             </v-list>
           </v-card>
         </v-flex>
-        <v-toolbar slot="footer" class="mt-2" color="indigo" dark dense flat >
-          <v-toolbar-title class="subheading">Last report update {{ today }}</v-toolbar-title>
-        </v-toolbar>
+
       </v-data-iterator>
+</v-container>
+</v-card>
     </v-container>
+
     <v-container fluid v-if="!this.$store.state.loading&&this.$store.state.contractNumber">
       <v-layout row justify-center align-center>
         <v-flex xs12>
@@ -52,16 +65,49 @@
         </v-flex>
       </v-layout>
     </v-container>
+
+    <v-container fluid grid-list-md v-if="!this.$store.state.contractNumber" transition="slide-y-transition" >
+      <v-card>
+
+          <v-toolbar color="white" flat>
+
+            <v-toolbar-title class="grey--text text--darken-4">Statistics</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn icon light>
+           <v-switch v-model="showCharts"></v-switch>
+         </v-btn>
+          </v-toolbar>
+
+      <v-progress-linear :indeterminate="true" v-if="this.$store.state.loading"></v-progress-linear>
+
+  <v-container fluid grid-list-md v-if="!this.$store.state.loading&&showCharts">
+
+    <v-layout row wrap>
+              <v-flex xs4 v-for="n in 3"
+              :key="n">
+                <v-card>
+                  <Chart />
+                </v-card>
+              </v-flex>
+            </v-layout>
+  </v-container>
+  </v-card>
+      </v-container>
   </v-content>
 </template>
 
 <script>
 import config from './../config'
-
+import Chart from '@/components/Chart.vue'
 export default {
   beforeMount () { this.getContracts() },
+  components: {
+    Chart
+  },
   data () {
     return {
+      showContract: true,
+      showCharts: true,
       center: { lat: 45.508, lng: -73.587 }, // Montreal
       currentMidx: null,
       currentPlace: null,
@@ -78,7 +124,6 @@ export default {
       markers: [],
       pagination: { rowsPerPage: 4 },
       rowsPerPageItems: [4, 8, 12],
-      today: this.getTodayDate(),
       zoom: 12
     }
   },
@@ -125,20 +170,7 @@ export default {
           console.error(`/api/reports/contracts error: ${JSON.stringify(err)}\n`)
         })
     },
-    getTodayDate () {
-      let today = new Date()
-      let dd = today.getDate()
-      let mm = today.getMonth() + 1 // January is 0
-      let yyyy = today.getFullYear()
-      if (dd < 10) {
-        dd = `0${dd}`
-      }
-      if (mm < 10) {
-        mm = `0${mm}`
-      }
-      today = `${mm}/${dd}/${yyyy}`
-      return today
-    },
+
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(
         position => {

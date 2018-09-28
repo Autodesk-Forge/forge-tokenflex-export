@@ -13,16 +13,22 @@ npm install
 npm run init 'YOUR ClientID' 'YOUR ClientSecret' 'YOUR CallbackURL'
 ````
 
+To initialize the client:
+````bash
+cd client
+npm install
+````
+
 To start the backend (in dev):
 ````bash
 cd server
 npm run dev
 ````
 
-To start the frontend:
+To start the frontend (in dev):
 ````bash
 cd client
-npm run dev
+npm run serve
 ````
 
 ## License

@@ -28,7 +28,7 @@ export default new Vuex.Store({
     },
     setLoading (state, loading) {
       state.loading = loading
-    },
+    }
   },
   actions: {
     setContractNumber ({ commit }, contractNumber) {
@@ -45,6 +45,6 @@ export default new Vuex.Store({
     },
     setLoading ({ commit }, loading) {
       commit('setLoading', loading)
-    },
+    }
   }
 })
