@@ -11,7 +11,6 @@
   "https_port": 5001,
   "scope": "<your scope>",
   "session": {
-    "key": "koa:sess",
     "maxAge": 3600000,
     "overwrite": true,
     "httpOnly": true,

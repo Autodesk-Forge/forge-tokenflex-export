@@ -17,7 +17,12 @@
       </v-list-tile-content>
     </v-list-tile>
     <v-list-tile v-if="this.$store.state.isUserLoggedIn">
-      <v-list-tile-action>
+      <v-progress-circular
+      indeterminate
+      color="primary"
+      v-if="this.$store.state.loading"
+    ></v-progress-circular>
+      <v-list-tile-action v-if="!this.$store.state.loading">
         <v-flex xs4 sm2 md1>
           <v-avatar size="40px" :title="this.$store.state.user.fullName">
             <img
@@ -31,7 +36,7 @@
         <v-flex no-wrap xs5 sm3>
         <strong v-html="  this.$store.state.user.fullName  "></strong>
       </v-flex>
-      </v-list-tile-content>
+    </v-list-tile-content>
     </v-list-tile>
     <v-list-tile v-if="!this.$store.state.isUserLoggedIn" @click="login">
       <v-list-tile-action>
@@ -65,11 +70,11 @@ export default {
       this.$router.push('/')
     },
     login () {
-      window.location.href = `${config.koahost}/api/oauth/authenticate`
+      window.location.href = new URL('/api/oauth/authenticate', config.koahost).href
     },
     async logout () {
       const response = await this.$axios.get(
-        `${config.koahost}/api/oauth/logout`
+        new URL('/api/oauth/logout', config.koahost).href
       )
       if (response.status === 200) {
         this.$store.state.isUserLoggedIn = false

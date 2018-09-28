@@ -3,7 +3,8 @@
 const Router = require('koa-router')
 const rp = require('request-promise')
 
-const config = require('./../configuration/config.json')
+const Config = require('config-js')
+const config = new Config('./src/configuration/config.js')
 const router = new Router({ prefix: '/api' })
 
 router.get(
@@ -11,7 +12,7 @@ router.get(
   async (ctx) => {
     if (ctx.isAuthenticated) {
       const options = {
-        agentOptions: { secureProtocol: config.tlsversion },
+        agentOptions: { secureProtocol: config.get('tlsversion') },
         headers: { Authorization: `Bearer ${ctx.session.passport.user.access_token}` },
         json: true,
         method: 'GET',
@@ -30,7 +31,7 @@ router.get(
   async (ctx) => {
     if (ctx.isAuthenticated) {
       const options = {
-        agentOptions: { secureProtocol: config.tlsversion },
+        agentOptions: { secureProtocol: config.get('tlsversion') },
         headers: { Authorization: `Bearer ${ctx.session.passport.user.access_token}` },
         json: true,
         method: 'GET',
@@ -49,7 +50,7 @@ router.get(
   async (ctx) => {
     if (ctx.isAuthenticated) {
       const options = {
-        agentOptions: { secureProtocol: config.tlsversion },
+        agentOptions: { secureProtocol: config.get('tlsversion') },
         headers: { Authorization: `Bearer ${ctx.session.passport.user.access_token}` },
         json: true,
         method: 'GET',
@@ -63,4 +64,4 @@ router.get(
   }
 )
 
-module.exports = router
+module.exports = router // eslint-enable no-use-before-define

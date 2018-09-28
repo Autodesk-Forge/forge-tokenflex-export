@@ -1,17 +1,18 @@
 const passport = require('koa-passport')
 const OAuth2Strategy = require('passport-oauth2').Strategy
 
-const config = require('./../configuration/config.json')
+const Config = require('config-js')
+const config = new Config('./src/configuration/config.js')
 
 /**
  * Initiate 3-legged OAuth 2.0 Forge Strategy
- * 
- * The configuration must be generated first 
+ *
+ * The configuration must be generated first
  * by running the script `npm run init`
  */
 passport.use(
   new OAuth2Strategy(
-    config.oauth2,
+    config.get('oauth2'),
     (accessToken, refreshToken, profile, done) => {
       if (accessToken && refreshToken) {
         const tokens = { access_token: accessToken, refresh_token: refreshToken }

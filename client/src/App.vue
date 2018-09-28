@@ -35,9 +35,10 @@ export default {
   }),
   methods: {
     async setUserData () {
+      this.$store.dispatch('setLoading',true)
       await this.$axios({
         method: 'GET',
-        url: `${config.koahost}/api/user/profile`
+        url: new URL('/api/user/profile', config.koahost).href
       })
         .then(response => {
           if (response.data) {
@@ -51,7 +52,7 @@ export default {
         })
         .catch(err => {
           console.error(`\n/api/user/profile error: ${JSON.stringify(err)}\n`)
-        })
+        }).finally(()=>this.$store.dispatch('setLoading',false))
     }
   },
   name: 'App'

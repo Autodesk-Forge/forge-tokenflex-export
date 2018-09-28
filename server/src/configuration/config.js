@@ -1,26 +1,27 @@
-'use strict'
-
-const config = require('./default.json')
-const fs = require('fs')
-
-config.oauth2.authorizationURL = 'https://developer-stg.api.autodesk.com/authentication/v1/authorize'
-config.oauth2.callbackURL = process.env.FORGE_CALLBACK_URL
-config.oauth2.clientID = process.env.FORGE_CLIENT_ID
-config.oauth2.clientSecret = process.env.FORGE_CLIENT_SECRET
-config.oauth2.tokenURL = 'https://developer-stg.api.autodesk.com/authentication/v1/gettoken'
-config.scope = ['data:read']
-
-config.vuehost = process.env.HEROKU_VUE_HOST
-
-fs.writeFile(
-  './src/configuration/config.json',
-  JSON.stringify(config, null, 2),
-  err => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    console.info('New configuration file has been created.\n')
-  })
-
-module.exports = config
+/* eslint-disable no-use-before-define */
+module.exports = {
+  'favicon': '/public/favicon.ico',
+  'oauth2': {
+    'authorizationURL': 'https://developer-stg.api.autodesk.com/authentication/v1/authorize',
+    'clientID': 'r51MKhr7F3kRzKGNi4d5kIgg5c3Ge727',
+    'clientSecret': 'ViVFIGu6XAQcrrHV',
+    'callbackURL': 'http://localhost:5000/api/oauth/callback',
+    'tokenURL': 'https://developer-stg.api.autodesk.com/authentication/v1/gettoken'
+  },
+  'http_port': 5000,
+  'https_port': 5001,
+  'scope': [
+    'data:read'
+  ],
+  'session': {
+    'maxAge': 3600000,
+    'overwrite': true,
+    'httpOnly': true,
+    'signed': true,
+    'rolling': false,
+    'renew': false
+  },
+  'tlsversion': 'TLSv1_2_method',
+  'vuehost': 'http://localhost:8080'
+}
+/* eslint-enable no-use-before-define */
