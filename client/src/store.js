@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    loading: false,
     contractNumber: null,
     isUserLoggedIn: false,
     user: {
@@ -24,7 +25,10 @@ export default new Vuex.Store({
     },
     setUserPicture (state, pictureUri) {
       state.user.picture = pictureUri
-    }
+    },
+    setLoading (state, loading) {
+      state.loading = loading
+    },
   },
   actions: {
     setContractNumber ({ commit }, contractNumber) {
@@ -38,6 +42,9 @@ export default new Vuex.Store({
     },
     setUserPicture ({ commit }, pictureUri) {
       commit('setUserPicture', pictureUri)
-    }
+    },
+    setLoading ({ commit }, loading) {
+      commit('setLoading', loading)
+    },
   }
 })

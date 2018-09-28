@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon src/server.js --ignore src/configuration/config.json",
-    "init": "node src/configuration/config.js",
+    "init": "node src/configuration/init.js",
     "standard": "standard ./src/**/*.js",
     "start": "NODE_ENV=production node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "@koa/cors": "^2.2.2",
+    "config-js": "^1.1.9",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
     "koa-favicon": "^2.0.1",

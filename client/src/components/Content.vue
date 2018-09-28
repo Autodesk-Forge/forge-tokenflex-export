@@ -1,10 +1,11 @@
 <template>
   <v-content>
     <v-container fluid grid-list-md v-if="!this.$store.state.contractNumber">
-      <v-data-iterator :items="items" :rows-per-page-items="rowsPerPageItems" :pagination.sync="pagination" content-tag="v-layout" hide-actions row wrap >
-        <v-toolbar slot="header" class="mb-2" color="indigo darken-5" dark flat >
-          <v-toolbar-title>Contracts</v-toolbar-title>
-        </v-toolbar>
+      <v-toolbar slot="header" class="mb-2" color="indigo darken-5" dark flat >
+        <v-toolbar-title>Contracts</v-toolbar-title>
+      </v-toolbar>
+      <v-progress-linear :indeterminate="true" v-if="this.$store.state.loading"></v-progress-linear>
+      <v-data-iterator :items="items" :rows-per-page-items="rowsPerPageItems" :pagination.sync="pagination" content-tag="v-layout" hide-actions row wrap v-if='!this.$store.state.loading'>      
         <v-flex slot="item" slot-scope="props" xs12 sm6 md4 lg3 >
           <v-card>
             <v-card-actions>
@@ -36,7 +37,7 @@
         </v-toolbar>
       </v-data-iterator>
     </v-container>
-    <v-container fluid v-if="this.$store.state.contractNumber">
+    <v-container fluid v-if="!this.$store.state.loading&&this.$store.state.contractNumber">
       <v-layout row justify-center align-center>
         <v-flex xs12>
           <v-card flat>
@@ -113,7 +114,7 @@ export default {
     async getContracts () {
       await this.$axios({
         method: 'GET',
-        url: `${config.koahost}/api/reports/contracts`
+        url: new URL('/api/reports/contracts', config.koahost).href
       })
         .then(response => {
           if (response.data) {

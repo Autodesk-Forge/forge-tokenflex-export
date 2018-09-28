@@ -3,7 +3,7 @@
 const requireLogin = async (ctx, next) => {
   if (ctx.isAuthenticated()) {
     await next()
-  }  else if (ctx.session && ctx.session.publicCredentials.access_token) {
+  } else if (ctx.session && ctx.session.publicCredentials.access_token) {
     await next()
   } else {
     ctx.status = 401
@@ -12,4 +12,4 @@ const requireLogin = async (ctx, next) => {
     }
   }
 }
-module.exports = requireLogin
+module.exports = requireLogin // eslint-enable no-use-before-define

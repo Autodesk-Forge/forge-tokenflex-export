@@ -3,7 +3,8 @@
 const passport = require('koa-passport')
 const Router = require('koa-router')
 
-const config = require('./../configuration/config.json')
+const Config = require('config-js')
+const config = new Config('./src/configuration/config.js')
 const Token = require('./../auth/token')
 
 const router = new Router({ prefix: '/api/oauth' })
@@ -17,7 +18,7 @@ router.get(
   '/authenticate',
   passport.authenticate(
     'oauth2',
-    { scope: config.scope }
+    { scope: config.get('scope') }
   ))
 
 /**
@@ -38,15 +39,15 @@ router.get(
         let forgeSession = {
           oauth2: {
             auto_refresh: false,
-            client_id: config.oauth2.clientID,
-            client_secret: config.oauth2.clientSecret,
+            client_id: config.get('oauth2.clientID'),
+            client_secret: config.get('oauth2.clientSecret'),
             expires_at: '',
-            redirect_uri: config.oauth2.callbackURL,
-            scope: config.scope
+            redirect_uri: config.get('oauth2.callbackURL'),
+            scope: config.get('scope')
           }
         }
         tokenSession.setForgeSession(forgeSession)
-        ctx.redirect(`${config.vuehost}/auth?isUserLoggedIn=true`)
+        ctx.redirect(`${config.get('vuehost')}/auth?isUserLoggedIn=true`)
       })(ctx)
   })
 
@@ -69,4 +70,4 @@ router.get(
   }
 )
 
-module.exports = router
+module.exports = router // eslint-enable no-use-before-define
