@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    loading: false,
+    loading: {contracts: false, charts: false},
     contractNumber: null,
     isUserLoggedIn: false,
     user: {
@@ -27,7 +27,7 @@ export default new Vuex.Store({
       state.user.picture = pictureUri
     },
     setLoading (state, loading) {
-      state.loading = loading
+      Object.assign(state.loading, loading)
     }
   },
   actions: {

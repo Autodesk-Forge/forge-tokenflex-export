@@ -1,60 +1,37 @@
 <template>
-		<canvas ref="chartHolder"></canvas>
+<canvas ref="chartHolder"></canvas>
 </template>
 <script>
 import Chart from 'chart.js'
-let randomScalingFactor = () => {
-  return Math.round(Math.random() * 100)
-}
-let chartColors = {
-    	red: 'rgb(255, 99, 132)',
-    	orange: 'rgb(255, 159, 64)',
-    	yellow: 'rgb(255, 205, 86)',
-    	green: 'rgb(75, 192, 192)',
-    	blue: 'rgb(54, 162, 235)',
-    	purple: 'rgb(153, 102, 255)',
-    	grey: 'rgb(201, 203, 207)'
-}
+
 export default {
   data () {
     return {
+      chart: null,
       today: new Date().today() + ' ' + new Date().timeNow()
     }
   },
+  props: ['datasets', 'labels', 'type', 'title'],
   mounted () {
     let config = {
-      type: 'pie',
+      type: this.type,
       data: {
-        datasets: [{
-          data: [
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor()
-          ],
-          backgroundColor: [
-            chartColors.red,
-            chartColors.orange,
-            chartColors.yellow,
-            chartColors.green,
-            chartColors.blue
-          ],
-          label: 'Contracts'
-        }],
-        labels: [
-          'Red',
-          'Orange',
-          'Yellow',
-          'Green',
-          'Blue'
-        ]
+        datasets: this.datasets,
+        labels: this.labels
       },
       options: {
-        responsive: true
+        responsive: true,
+        title: {
+          display: !!this.title,
+          text: this.title
+        },
+        legend: {
+          display: this.type !== 'bar'
+        }
+
       }
     }
-    new Chart(this.$refs['chartHolder'], config)
+    this.chart = new Chart(this.$refs['chartHolder'], config)
   }
 }
 

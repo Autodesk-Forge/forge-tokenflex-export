@@ -11,11 +11,10 @@
 
 <script>
 export default {
-  data () {
-    return {
+  data: () => (
+    {
       today: new Date().today() + ' ' + new Date().timeNow()
-    }
-  }
+    })
 }
 
 </script>

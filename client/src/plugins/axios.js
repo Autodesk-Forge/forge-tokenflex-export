@@ -20,7 +20,7 @@ let config = {
 }
 
 const _axios = axios.create(config)
-
+const cancelToken = axios.CancelToken
 _axios.interceptors.request.use(
   function (config) {
     // Do something before request is sent
@@ -56,6 +56,11 @@ Plugin.install = function (Vue, options) {
     $axios: {
       get () {
         return _axios
+      }
+    },
+    $cancelToken: {
+      get () {
+        return cancelToken
       }
     }
   })

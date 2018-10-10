@@ -5,6 +5,20 @@
 
     <Content />
     <Footer />
+
+    <v-dialog
+      v-model="dialog"
+      max-width="80%"
+    >
+      <v-card>
+        <v-card-title class="grey lighten-3">{{dialogHeader}}</v-card-title>
+
+        <v-card-text>
+          {{dialogMessage}}
+        </v-card-text>
+
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 
@@ -31,10 +45,12 @@ export default {
     }
   },
   components: {
-    Content, Footer, Header, Chart
+    Content, Footer, Header
   },
   data: () => ({
-    drawer: null
+    dialog: false,
+    dialogHeader: '',
+    dialogMessage: ''
   }),
   methods: {
     async setUserData () {
@@ -54,7 +70,9 @@ export default {
           }
         })
         .catch(err => {
-          console.error(`\n/api/user/profile error: ${JSON.stringify(err)}\n`)
+          this.dialog = true
+          this.dialogHeader = 'Error'
+          this.dialogMessage = err
         }).finally(() => this.$store.dispatch('setLoading', false))
     }
   },

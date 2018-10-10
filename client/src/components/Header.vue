@@ -8,15 +8,15 @@
 
    <v-spacer></v-spacer>
 
-   <v-btn color="blue-grey" :icon="$vuetify.breakpoint.xs" @click="goHome">
-     <v-icon>home</v-icon><span class="hidden-md-and-down">Home</span>
+   <v-btn color="blue" :icon="$vuetify.breakpoint.xs" :href="githubRepoUrl">
+     <v-icon>code</v-icon><span class="hidden-md-and-down">Source</span>
    </v-btn>
-   <v-btn color="blue-grey" :icon="$vuetify.breakpoint.xs" @click="login" v-if="!this.$store.state.isUserLoggedIn">
+   <v-btn color="blue" :icon="$vuetify.breakpoint.xs" @click="login" v-if="!this.$store.state.isUserLoggedIn">
 
      <v-icon>person</v-icon><span class="hidden-md-and-down">Login</span>
    </v-btn>
 
-   <v-btn color="blue-grey" :icon="$vuetify.breakpoint.xs" @click="logout" v-if="this.$store.state.isUserLoggedIn">
+   <v-btn color="blue" :icon="$vuetify.breakpoint.xs" @click="logout" v-if="this.$store.state.isUserLoggedIn">
    <v-icon>power_settings_new</v-icon><span class="hidden-md-and-down">Logout</span>
    </v-btn>
    <span v-if="this.$store.state.isUserLoggedIn">
@@ -39,14 +39,16 @@
 import config from './../config'
 
 export default {
+  data: () => (
+    {
+      githubRepoUrl: config.githubRepoUrl
+    }),
   methods: {
     displayContracts () {
       this.$router.push('/contracts?isUserLoggedIn=true')
       this.$router.go()
     },
-    goHome () {
-      this.$router.push('/')
-    },
+
     login () {
       window.location.href = new URL('/api/oauth/authenticate', config.koahost).href
     },
@@ -61,7 +63,7 @@ export default {
           'https://accounts-staging.autodesk.com/Authentication/LogOut',
           '_blank'
         )
-        this.$router.push('/')
+        window.location.href = '/'
       }
     }
   }
