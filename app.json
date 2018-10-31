@@ -1,0 +1,26 @@
+{
+  "name": "tokenflex-reporting",
+  "description": "A Forge application to report on consumption data.",
+  "repository": "https://github.com/ParsePlatform/parse-server-example",
+  "logo": "https://avatars0.githubusercontent.com/u/1294580?v=3&s=200",
+  "keywords": ["Autodesk","Forge","Boilerplate","Koa","Javascript","Passport"],
+  "env": {
+    "FORGE_CLIENT_ID": {
+      "description": "Your Forge APP Client ID",
+      "value": ""
+    },
+    "FORGE_CLIENT_SECRET": {
+      "description": "Your Forge APP Client Secret",
+      "value": ""
+    },
+    "FORGE_CALLBACK_URL": {
+      "description": "Your Forge APP Callback URL, must follow <nameofyourapp>.herokuapp.com/api/oauth/authenticate",
+      "value": ""
+    },
+    "GoogleAPIKey": {
+      "description": "Your Google API Key, get one from https://developers.google.com/maps/documentation/javascript/get-api-key",
+      "value": ""
+    }
+  },
+  "image": "heroku/nodejs"
+}
