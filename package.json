@@ -6,6 +6,7 @@
   "dependencies": {
     "@koa/cors": "^2.2.2",
     "config": "^2.0.1",
+    "event-stream": "^3.3.4",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
     "koa-favicon": "^2.0.1",
@@ -46,12 +47,12 @@
     "dev": "nodemon server/src/server.js",
     "prod": "NODE_ENV=production node server/src/server.js",
     "init": "node server/src/configuration/init.js",
-    "postinstall": "node server/src/configuration/init.js && vue-cli-service build",
+    "postinstall": "node server/src/configuration/init.js",
     "standard": "standard server/src/**/*.js --fix",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint ./client/src --fix",
-    "test": "vue-cli-service lint ./client/src --no-fix && node server/src/server.js test"
+    "test": "vue-cli-service lint ./client/src --no-fix && NODE_ENV=default vue-cli-service build && node server/src/server.js test"
   },
   "repository": {
     "type": "git",
