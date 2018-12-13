@@ -50,17 +50,17 @@ export default {
     },
 
     login () {
-      window.location.href = new URL('/api/oauth/authenticate', config.koahost).href
+      window.location.href = new URL('/api/forge/authenticate', config.koahost).href
     },
     async logout () {
       const response = await this.$axios.get(
-        new URL('/api/oauth/logout', config.koahost).href
+        new URL('/api/forge/logout', config.koahost).href
       )
       if (response.status === 200) {
         this.$store.state.isUserLoggedIn = false
         this.$store.dispatch('setUser', null)
         window.open(
-          new URL('/api/oauth/logoutaccount', config.koahost).href,
+          new URL('/api/forge/logoutaccount', config.koahost).href,
           '_blank'
         )
         window.location.href = '/'

@@ -1,7 +1,8 @@
 'use strict'
+const config = require('config')
 
 const requireLogin = async (ctx, next) => {
-  if (ctx.req.url.indexOf('/api') === 0) {
+  if (ctx.req.url.indexOf('/api/forge') === 0 && ctx.req.url.indexOf(new URL(config.get('oauth2.callbackURL')).pathname) !== 0) {
     if (ctx.isAuthenticated()) {
       await next()
     } else if (ctx.session && ctx.session.publicCredentials && ctx.session.publicCredentials.access_token) {

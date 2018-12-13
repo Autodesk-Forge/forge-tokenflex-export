@@ -4,7 +4,7 @@
     "authorizationURL": "https://developer.api.autodesk.com/authentication/v1/authorize",
     "clientID": "<your Forge app ID>",
     "clientSecret": "<your Forge app secret>",
-    "callbackURL": "/callback",
+    "callbackURL": "<your host>/api/forge/callback/oauth",
     "tokenURL": "https://developer.api.autodesk.com/authentication/v1/gettoken"
   },
   "http_port": 5000,

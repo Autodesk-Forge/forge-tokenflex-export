@@ -4,7 +4,7 @@ const Router = require('koa-router')
 const rp = require('request-promise')
 
 const config = require('config')
-const router = new Router({ prefix: '/api' })
+const router = new Router({ prefix: '/api/forge' })
 const url = require('url')
 
 const getOptions = (getUrl, ctx) => ({

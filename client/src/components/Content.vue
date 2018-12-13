@@ -292,7 +292,7 @@ export default {
       await this.$axios({
         method: 'GET',
         cancelToken: item.cancelSource.token,
-        url: new URL(`/api/reports/${item.contractNumber}/query`, config.koahost).href
+        url: new URL(`/api/forge/reports/${item.contractNumber}/query`, config.koahost).href
       })
         .then(response => {
           item.cancelSource = null
@@ -329,7 +329,7 @@ export default {
         })
         .catch(err => {
           this.showError(err)
-          console.error(`/api/reports/${item.contractNumber}/query error`, err)
+          console.error(`/api/forge/reports/${item.contractNumber}/query error`, err)
         })
     },
     async getContracts () {
@@ -337,7 +337,7 @@ export default {
       this.$store.dispatch('setContractNumber', '')
       await this.$axios({
         method: 'GET',
-        url: new URL('/api/reports/contracts', config.koahost).href
+        url: new URL('/api/forge/reports/contracts', config.koahost).href
       })
         .then(response => {
           if (response.data) {
@@ -348,7 +348,7 @@ export default {
         .catch(err => {
           this.showError(err)
 
-          console.error(`/api/reports/contracts error`, err)
+          console.error(`/api/forge/reports/contracts error`, err)
         })
         .finally(() => this.$store.dispatch('setLoading', { contracts: false }))
     },
@@ -364,7 +364,7 @@ export default {
       this.showStatsCancelSource = this.$cancelToken.source()
       this.$axios({
         method: 'GET',
-        url: new URL(`/api/reports/summary/${contractNumber}`, config.koahost).href,
+        url: new URL(`/api/forge/reports/summary/${contractNumber}`, config.koahost).href,
         cancelToken: this.showStatsCancelSource.token
       })
         .then(response => {
@@ -433,7 +433,7 @@ export default {
         .catch(err => {
           this.showError(err)
 
-          console.error(`/api/reports/summary/${contractNumber} error`, err)
+          console.error(`/api/forge/reports/summary/${contractNumber} error`, err)
         })
         .finally(() => this.$store.dispatch('setLoading', { charts: false }))
     },

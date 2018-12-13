@@ -7,7 +7,7 @@ const Router = require('koa-router')
 const config = require('config')
 const Token = require('./../auth/token')
 
-const router = new Router({ prefix: '/api/oauth' })
+const router = new Router({ prefix: '/api/forge' })
 const url = require('url')
 /**
  * Authenticate
@@ -28,7 +28,7 @@ router.get(
  * from the Forge App callback URL
  */
 router.get(
-  '/callback',
+  '/callback/oauth',
   ctx => {
     return passport.authenticate(
       'oauth2',

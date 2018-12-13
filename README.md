@@ -105,7 +105,7 @@ To deploy this application to [Heroku](https://heroku.com/), make sure the follo
 
 And **FORGE_CALLBACK_URL** must follow the pattern below and match the one set for your Forge APP:
  ```
- <nameofyourapp>.herokuapp.com/api/oauth/authenticate
+ <nameofyourapp>.herokuapp.com/api/forge/oauth
  ```
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https://github.com/mazerab/consumption-reporting-vue-koa-app)

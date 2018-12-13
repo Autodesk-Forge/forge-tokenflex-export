@@ -57,7 +57,7 @@ export default {
       this.$store.dispatch('setLoading', { userInfo: true })
       await this.$axios({
         method: 'GET',
-        url: new URL('/api/user/profile', config.koahost).href
+        url: new URL('/api/forge/user/profile', config.koahost).href
       })
         .then(response => {
           if (response.data) {
