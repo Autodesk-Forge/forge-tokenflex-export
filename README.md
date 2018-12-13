@@ -32,6 +32,7 @@ Uses [3-legged oAuth2](https://forge.autodesk.com/en/docs/oauth/v2/tutorials/get
 - Internet connectivity to the Google Map API
 - Tested to be working on: Chrome, Safari, Firefox and IE Edge
 - A Google API Key for Google Maps, you can get one [here](https://developers.google.com/maps/documentation/javascript/get-api-key)
+- When logging into the web dashboard, you should login with the Autodesk ID of a contract manager or software coordinator to gain access to the contracts' usage data. If you login with a user that does not have such roles, the API will return no data.
 
 ### Setup
 
