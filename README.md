@@ -10,7 +10,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/79b42eaa59c06ec13703/maintainability)](https://codeclimate.com/github/dukedhx/consumption-reporting-vue-koa-app/maintainability)
 [![MIT](https://camo.githubusercontent.com/b323cc1dc1fbf413e36d79b86abc71b68b648e4b/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f6c2f767565746966792e737667)](https://opensource.org/licenses/MIT)<br/>
 [![zenhub](https://camo.githubusercontent.com/7e10f7ff8cd1064be463e8846910c6a2aa2d2567/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d616e616765645f776974682d5a656e4875622d3565363062612e737667)](https://app.zenhub.com/workspace/o/dukedhx/consumption-reporting-vue-koa-app/)
-[![Stackoverflow](https://img.shields.io/badge/ask-stackoverflow-yellow.svg)](https://stackoverflow.com/questions/ask?tags=%5bautodesk-forge,forge-tokenflex)
+[![Stackoverflow](https://img.shields.io/badge/ask-stackoverflow-yellow.svg)](https://stackoverflow.com/questions/ask?tags=%5bautodesk-forge)
 
 
 
@@ -40,7 +40,7 @@ Uses [3-legged oAuth2](https://forge.autodesk.com/en/docs/oauth/v2/tutorials/get
 
 - Clone this project or download it. It's recommended to install [GitHub desktop](https://desktop.github.com/). To clone via command line, use the following (**Terminal** on MacOS/Linux, **Git Shell** on Windows):
 ```
-git clone https://github.com/mazerab/consumption-reporting-vue-koa-app
+git clone https://github.com/Autodesk-Forge/tokenflex-nodejs-report.webapp
 ```
 - Initialize and install the dependencies
 ```bash
