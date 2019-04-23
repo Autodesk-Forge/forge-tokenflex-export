@@ -33,6 +33,7 @@ Uses [3-legged oAuth2](https://forge.autodesk.com/en/docs/oauth/v2/tutorials/get
 - Tested to be working on: Chrome, Safari, Firefox and IE Edge
 - A Google API Key for Google Maps, you can get one [here](https://developers.google.com/maps/documentation/javascript/get-api-key)
 - When logging into the web dashboard, you should login with the Autodesk ID of a contract manager or software coordinator to gain access to the contracts' usage data. If you login with a user that does not have such roles, the API will return no data.
+- In order to access TokenFlex API, your contract manager needs to login in the accounts portal and assign the Forge subscription to the Forge account user. Before he can assign the subscription he will need to unassign the subscription from his user account. Contact your account manager for assistance.
 
 ### Setup
 
