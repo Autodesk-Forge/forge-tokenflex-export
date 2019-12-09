@@ -55,8 +55,8 @@
     "standard": "standard server/src/**/*.js --fix",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint ./client/src --fix",
-    "test": "vue-cli-service lint ./client/src --no-fix && NODE_ENV=default vue-cli-service build && node server/src/server.js test"
+    "lint": "vue-cli-service lint ./client/src/*.vue ./client/src/*.js --fix",
+    "test": "vue-cli-service lint ./client/src/*.vue ./client/src/*.js --no-fix && NODE_ENV=default vue-cli-service build && node server/src/server.js test"
   },
   "repository": {
     "type": "git",
