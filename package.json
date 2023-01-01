@@ -5,7 +5,7 @@
   "main": "server/src/server.js",
   "dependencies": {
     "@koa/cors": "^2.2.2",
-    "config": "^2.0.1",
+    "config": "^3.3.8",
     "event-stream": "^3.3.4",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
@@ -23,9 +23,9 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.0.0-beta.49",
-    "@vue/cli-plugin-babel": "^4.1.1",
-    "@vue/cli-plugin-eslint": "^4.1.1",
-    "@vue/cli-service": "^4.1.1",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
     "@vue/eslint-config-standard": "^4.0.0",
     "acorn": ">=6.0.0",
     "ajv": ">=5.0.0",
